@@ -1,0 +1,1 @@
+# java_school_online_store_minikube_config
