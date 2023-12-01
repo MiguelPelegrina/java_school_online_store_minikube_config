@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mkdocs
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mkdocs
+  template:
+    metadata:
+      labels:
+        app: mkdocs
+    spec:
+      containers:
+      - name: mkdocs
+        image: migupele/java_school_online_store_documentation:latest
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mkdocs
+spec:
+  type: NodePort
+  selector:
+    app: mkdocs
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
+      nodePort: 30200
