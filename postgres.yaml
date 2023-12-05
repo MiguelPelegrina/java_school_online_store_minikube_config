@@ -34,9 +34,9 @@ metadata:
 spec:
   ports:
     - protocol: TCP
+      nodePort: 30500
       port: 5432
       targetPort: 5432
-      nodePort: 30500
   selector:
     app: postgres
   type: NodePort

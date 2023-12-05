@@ -17,7 +17,7 @@ spec:
         image: sonarqube:latest
         env:
         - name: SONARQUBE_JDBC_HOSTNAME
-          value: database
+          value: postgres
         - name: SONARQUBE_JDBC_USERNAME
           value: postgres
         - name: SONARQUBE_JDBC_PASSWORD
@@ -35,4 +35,4 @@ spec:
       port: 9000
       targetPort: 9000
       nodePort: 30600
-  type: NodePort
+  type: LoadBalancer

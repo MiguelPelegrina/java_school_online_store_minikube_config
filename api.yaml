@@ -38,4 +38,4 @@ spec:
       nodePort: 30100
   selector:
     app: api
-  type: NodePort
+  type: LoadBalancer

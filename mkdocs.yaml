@@ -21,11 +21,11 @@ kind: Service
 metadata:
   name: mkdocs
 spec:
-  type: NodePort
-  selector:
-    app: mkdocs
   ports:
     - protocol: TCP
       port: 8000
       targetPort: 8000
       nodePort: 30200
+  selector:
+    app: mkdocs
+  type: LoadBalancer
