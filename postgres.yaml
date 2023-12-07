@@ -26,6 +26,27 @@ spec:
           value: postgres 
         - name: POSTGRES_PASSWORD
           value: postgres
+        volumeMounts:
+            - mountPath: /docker-entrypoint-initdb.d
+              name: postgres-claim
+      restartPolicy: Always
+      volumes:
+        - name: postgres-claim
+          persistentVolumeClaim:
+            claimName: postgres-claim
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: postgres-claim
+  name: postgres-claim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
 ---
 apiVersion: v1
 kind: Service

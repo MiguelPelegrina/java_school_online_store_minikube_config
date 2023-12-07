@@ -1,3 +1,4 @@
+# Deployment
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -22,7 +23,85 @@ spec:
           value: postgres
         - name: SONARQUBE_JDBC_PASSWORD
           value: postgres
+        volumeMounts:
+            - mountPath: /opt/sonarqube/data
+              name: sonarqube-data
+            - mountPath: /opt/sonarqube/extensions
+              name: sonarqube-extensions
+            - mountPath: /opt/sonarqube/logs
+              name: sonarqube-logs
+            - mountPath: /opt/sonarqube/temp
+              name: sonarqube-temp
+      restartPolicy: Always
+      volumes:
+        - name: sonarqube-data
+          persistentVolumeClaim:
+            claimName: sonarqube-data
+        - name: sonarqube-extensions
+          persistentVolumeClaim:
+            claimName: sonarqube-extensions
+        - name: sonarqube-logs
+          persistentVolumeClaim:
+            claimName: sonarqube-logs
+        - name: sonarqube-temp
+          persistentVolumeClaim:
+            claimName: sonarqube-temp
+# Volumes
 ---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: sonarqube-temp
+  name: sonarqube-temp
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: sonarqube-logs
+  name: sonarqube-logs
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    io.kompose.service: sonarqube-extensions
+  name: sonarqube-extensions
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: sonarqube-data
+  name: sonarqube-data
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+# Service
+--- 
 apiVersion: v1
 kind: Service
 metadata:

@@ -20,6 +20,27 @@ spec:
           value: admin@admin.com
         - name: PGADMIN_DEFAULT_PASSWORD
           value: admin
+        volumeMounts:
+            - mountPath: /var/lib/pgadmin
+              name: pgadmin-claim
+      restartPolicy: Always
+      volumes:
+        - name: pgadmin-claim
+          persistentVolumeClaim:
+            claimName: pgadmin-claim
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: pgadmin-claim
+  name: pgadmin-claim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
 ---
 apiVersion: v1
 kind: Service
