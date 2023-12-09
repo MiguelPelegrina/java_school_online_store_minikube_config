@@ -23,9 +23,15 @@ spec:
         - name: POSTGRES_DB
           value: online_store
         - name: POSTGRES_USER
-          value: postgres 
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: postgres-user
         - name: POSTGRES_PASSWORD
-          value: postgres
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: postgres-password
         volumeMounts:
             - mountPath: /docker-entrypoint-initdb.d
               name: postgres-claim
