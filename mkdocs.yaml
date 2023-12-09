@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
       - name: mkdocs
-        image: migupele/java_school_online_store_documentation:latest
+        image: migupele/java_school_online_store_documentation:main
+        imagePullPolicy: Always
 ---
 apiVersion: v1
 kind: Service
