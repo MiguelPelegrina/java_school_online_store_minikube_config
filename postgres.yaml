@@ -33,13 +33,18 @@ spec:
               name: postgres-secret
               key: postgres-password
         volumeMounts:
-            - mountPath: /var/lib/postgresql/data
+            - mountPath: /docker-entrypoint-initdb.d
               name: postgres-claim
+            - mountPath: /var/lib/postgresql/data
+              name: postgres-data
       restartPolicy: Always
       volumes:
         - name: postgres-claim
           persistentVolumeClaim:
             claimName: postgres-claim
+        - name: postgres-data
+          persistentVolumeClaim:
+            claimName: postgres-data
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -47,6 +52,19 @@ metadata:
   labels:
     app: postgres-claim
   name: postgres-claim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: postgres-data
+  name: postgres-data
 spec:
   accessModes:
     - ReadWriteOnce
