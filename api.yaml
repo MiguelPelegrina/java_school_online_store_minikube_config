@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: api
-        image: migupele/java_school_online_store_api:latest
+        image: migupele/java_school_online_store_api:master
         ports:
         - containerPort: 8081
         env: 
