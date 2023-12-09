@@ -33,7 +33,7 @@ spec:
               name: postgres-secret
               key: postgres-password
         volumeMounts:
-            - mountPath: /docker-entrypoint-initdb.d
+            - mountPath: /var/lib/postgresql/data
               name: postgres-claim
       restartPolicy: Always
       volumes:
