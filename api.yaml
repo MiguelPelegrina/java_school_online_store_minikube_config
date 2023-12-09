@@ -17,6 +17,7 @@ spec:
       containers:
       - name: api
         image: migupele/java_school_online_store_api:master
+        imagePullPolicy: Always
         ports:
         - containerPort: 8081
         env: 
@@ -39,26 +40,3 @@ spec:
   selector:
     app: api
   type: LoadBalancer
-# ---
-# apiVersion: networking.k8s.io/v1
-# kind: Ingress
-# metadata:
-#   name: api-ingress
-#   annotations:
-#     spec.ingressClassName: "nginx"
-#     nginx.ingress.kubernetes.io/cors-allow-origin: "*"
-#     nginx.ingress.kubernetes.io/cors-allow-methods: "PUT, GET, POST, OPTIONS, DELETE"
-#     nginx.ingress.kubernetes.io/cors-allow-headers: "DNT,X-CustomHeader,X-LANG,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,X-Api-Key,X-Device-Id,Access-Control-Allow-Origin"
-#     nginx.ingress.kubernetes.io/enable-cors: "true"
-# spec:
-#   rules:
-#   - host: api
-#     http:
-#       paths:
-#       - path: /
-#         pathType: Prefix
-#         backend:
-#           service:
-#             name: api
-#             port:
-#               number: 8081
