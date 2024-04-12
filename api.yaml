@@ -26,6 +26,16 @@ spec:
             configMapKeyRef:
               name: postgres-config
               key: postgres-url
+        - name: MAIL_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: mail-secret
+              key: mail-username
+        - name: MAIL_PASSWORD
+          valueFrom:  
+            secretKeyRef:
+              name: mail-secret
+              key: mail-password
 ---
 apiVersion: v1
 kind: Service
