@@ -10,13 +10,17 @@
 - ```minikube addons enable ingress```
 - ```minikube tunnel```
 - Open another terminal: ```minikube dashboard```
-## WIP Current version requires installing Prometheus and Grafana on the host machine, working on implementing Infrastructure as Code properly
-### To run Prometheus
-- Install prometheus:
-- 
-### To run Grafana
-- Install Grafana:
-- 
-
-Notes:
-I am new to Kubernetes and this is my project to learn how to use it, therefore errors, bad practices, questionable design choices might happen, but improvements will happen over time as it's all part of the learning process!   
+- Select __All namespaces__ from the drop-down menu at the top left of the Kubernetes Dashboard to view everything.
+  - At the start __default__ is selected and all the related deployments and services related to metrics are in the __monitoring__ namespace.   
+## Notes:
+- The current configuration does not differ between a development and a production environemnt.
+- Currently the following services are running:
+  - Backend: Java Spring Boot API 
+    - API Documentation: OpenAPI (former Swagger)  
+  - Frontend: Angular 
+  - Database: postgreSQL 
+  - DBMS: pgAdmin4 
+  - Documentation: Mkdocs
+  - Code Analysis: SonarQube
+  - Metrics: Prometheus and Grafana  
+- I am new to Kubernetes and this is my project to learn how to use it, therefore errors, bad practices, questionable design choices might happen, but improvements will happen over time as it's all part of the learning process!   
