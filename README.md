@@ -1,7 +1,7 @@
-# Java School Online store minikube configuration
+# Kubernetes minikube configuration
 ## Useful commannds:
 ### To run a Kubernetes minikube:
-- 
+- Install Kubernetes on your device: [https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/](https://kubernetes.io/docs/tasks/tools/)
 ### To run all the applications and servers:
 - Set up the docker context as default: ```docker context use default```
 - Start the minikube:
@@ -17,3 +17,6 @@
 ### To run Grafana
 - Install Grafana:
 - 
+
+Notes:
+I am new to Kubernetes and this is my project to learn how to use it, therefore errors, bad practices, questionable design choices might happen, but improvements will happen over time as it's all part of the learning process!   
