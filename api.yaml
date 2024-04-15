@@ -43,10 +43,23 @@ metadata:
   name: api
 spec:
   ports:
-    - protocol: TCP
+    - protocol: 
+      name: http-traffic
       port: 8081
       targetPort: 8081
       nodePort: 30100
   selector:
     app: api
   type: LoadBalancer
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata: 
+  name: spring-prometheus-service-monitor
+spec:
+  selector: 
+    matchLabels:
+      app: spring-prometheus
+  endpoints:
+    - port: http-traffic
+      path: "/actuator/prometheus"
